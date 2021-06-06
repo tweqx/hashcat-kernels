@@ -14,7 +14,7 @@ New kernels for hashcat (> 6.0.0)
 
 ### On Windows
 - Download the [latest release](https://github.com/tweqx/hashcat-kernels/releases/)
-- Locate where hashcat is installed, 
+- Locate where hashcat is installed
 - Extract all `m90000_*` files of the archive to `<hashcat install dir>\OpenCL\`
 - Extract `module_90000.dll` in `<hashcat install dir>\modules\`
 
