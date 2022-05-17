@@ -6,12 +6,12 @@
 //#define NEW_SIMD_CODE
 
 #ifdef KERNEL_STATIC
-#include "inc_vendor.h"
-#include "inc_types.h"
-#include "inc_platform.cl"
-#include "inc_common.cl"
-#include "inc_scalar.cl"
-#include "inc_hash_blake2b.cl"
+#include M2S(INCLUDE_PATH/inc_vendor.h)
+#include M2S(INCLUDE_PATH/inc_types.h)
+#include M2S(INCLUDE_PATH/inc_platform.cl)
+#include M2S(INCLUDE_PATH/inc_common.cl)
+#include M2S(INCLUDE_PATH/inc_scalar.cl)
+#include M2S(INCLUDE_PATH/inc_hash_blake2b.cl)
 #endif
 
 KERNEL_FQ void m90000_mxx (KERN_ATTR_BASIC ())
@@ -22,7 +22,7 @@ KERNEL_FQ void m90000_mxx (KERN_ATTR_BASIC ())
 
   const u64 gid = get_global_id (0);
 
-  if (gid >= gid_max) return;
+  if (gid >= GID_CNT) return;
 
   /**
    * base
@@ -47,7 +47,7 @@ KERNEL_FQ void m90000_mxx (KERN_ATTR_BASIC ())
    * loop
    */
 
-  for (u32 il_pos = 0; il_pos < il_cnt; il_pos++)
+  for (u32 il_pos = 0; il_pos < IL_CNT; il_pos++)
   {
     blake2b_ctx_t ctx = ctx0;
 
@@ -74,7 +74,7 @@ KERNEL_FQ void m90000_sxx (KERN_ATTR_BASIC ())
 
   const u64 gid = get_global_id (0);
 
-  if (gid >= gid_max) return;
+  if (gid >= GID_CNT) return;
 
   /**
    * digest
@@ -82,10 +82,10 @@ KERNEL_FQ void m90000_sxx (KERN_ATTR_BASIC ())
 
   const u32 search[4] =
   {
-    digests_buf[DIGESTS_OFFSET].digest_buf[DGST_R0],
-    digests_buf[DIGESTS_OFFSET].digest_buf[DGST_R1],
-    digests_buf[DIGESTS_OFFSET].digest_buf[DGST_R2],
-    digests_buf[DIGESTS_OFFSET].digest_buf[DGST_R3]
+    digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R0],
+    digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R1],
+    digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R2],
+    digests_buf[DIGESTS_OFFSET_HOST].digest_buf[DGST_R3]
   };
 
   /**
@@ -111,7 +111,7 @@ KERNEL_FQ void m90000_sxx (KERN_ATTR_BASIC ())
    * loop
    */
 
-  for (u32 il_pos = 0; il_pos < il_cnt; il_pos++)
+  for (u32 il_pos = 0; il_pos < IL_CNT; il_pos++)
   {
     blake2b_ctx_t ctx = ctx0;
 
