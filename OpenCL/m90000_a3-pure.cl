@@ -71,7 +71,7 @@ KERNEL_FQ void m90000_mxx (KERN_ATTR_VECTOR ())
 
   blake2b_init (&ctx0);
 
-  blake2b_update_global (&ctx0, salt_bufs[SALT_POS].salt_buf, salt_bufs[SALT_POS].salt_len);
+  blake2b_update_global (&ctx0, salt_bufs[SALT_POS_HOST].salt_buf, salt_bufs[SALT_POS_HOST].salt_len);
 
   /**
    * loop
@@ -89,11 +89,11 @@ KERNEL_FQ void m90000_mxx (KERN_ATTR_VECTOR ())
 
     blake2b_ctx_vector_t ctx;
 
-    blake2b_init_vector_from_scalar (&ctx, &ctx0);
+    blake2b_init_vector_from_scalar   (&ctx, &ctx0);
 
     blake2b_update_vector (&ctx, w, pw_len);
 
-    blake2b_final_vector (&ctx);
+    blake2b_final_vector  (&ctx);
 
     const u32x r0 = h32_from_64 (ctx.h[0]);
     const u32x r1 = l32_from_64 (ctx.h[0]);
@@ -143,7 +143,7 @@ KERNEL_FQ void m90000_sxx (KERN_ATTR_VECTOR ())
 
   blake2b_init (&ctx0);
 
-  blake2b_update_global (&ctx0, salt_bufs[SALT_POS].salt_buf, salt_bufs[SALT_POS].salt_len);
+  blake2b_update_global (&ctx0, salt_bufs[SALT_POS_HOST].salt_buf, salt_bufs[SALT_POS_HOST].salt_len);
 
   /**
    * loop
@@ -161,7 +161,7 @@ KERNEL_FQ void m90000_sxx (KERN_ATTR_VECTOR ())
 
     blake2b_ctx_vector_t ctx;
 
-    blake2b_init_vector_from_scalar (&ctx, &ctx0);
+    blake2b_init_vector_from_scalar   (&ctx, &ctx0);
 
     blake2b_update_vector (&ctx, w, pw_len);
 
@@ -175,3 +175,4 @@ KERNEL_FQ void m90000_sxx (KERN_ATTR_VECTOR ())
     COMPARE_S_SIMD (r0, r1, r2, r3);
   }
 }
+

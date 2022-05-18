@@ -36,7 +36,7 @@ KERNEL_FQ void m90000_mxx (KERN_ATTR_RULES ())
 
   blake2b_init (&ctx0);
 
-  blake2b_update_global (&ctx0, salt_bufs[SALT_POS].salt_buf, salt_bufs[SALT_POS].salt_len);
+  blake2b_update_global (&ctx0, salt_bufs[SALT_POS_HOST].salt_buf, salt_bufs[SALT_POS_HOST].salt_len);
 
   /**
    * loop
@@ -94,7 +94,7 @@ KERNEL_FQ void m90000_sxx (KERN_ATTR_RULES ())
 
   blake2b_init (&ctx0);
 
-  blake2b_update_global (&ctx0, salt_bufs[SALT_POS].salt_buf, salt_bufs[SALT_POS].salt_len);
+  blake2b_update_global (&ctx0, salt_bufs[SALT_POS_HOST].salt_buf, salt_bufs[SALT_POS_HOST].salt_len);
 
   /**
    * loop

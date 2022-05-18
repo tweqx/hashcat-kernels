@@ -37,13 +37,13 @@ KERNEL_FQ void m90001_mxx (KERN_ATTR_VECTOR ())
     w[idx] = pws[gid].i[idx];
   }
 
-  const u32 salt_len = salt_bufs[SALT_POS].salt_len;
+  const u32 salt_len = salt_bufs[SALT_POS_HOST].salt_len;
 
   u32x s[64] = { 0 };
 
   for (u32 i = 0, idx = 0; i < salt_len; i += 4, idx += 1)
   {
-    s[idx] = salt_bufs[SALT_POS].salt_buf[idx];
+    s[idx] = salt_bufs[SALT_POS_HOST].salt_buf[idx];
   }
 
   /**
@@ -62,7 +62,7 @@ KERNEL_FQ void m90001_mxx (KERN_ATTR_VECTOR ())
 
     blake2b_ctx_vector_t ctx;
 
-    blake2b_init_vector (&ctx);
+    blake2b_init_vector   (&ctx);
 
     blake2b_update_vector (&ctx, w, pw_len);
 
@@ -114,13 +114,13 @@ KERNEL_FQ void m90001_sxx (KERN_ATTR_VECTOR ())
     w[idx] = pws[gid].i[idx];
   }
 
-  const u32 salt_len = salt_bufs[SALT_POS].salt_len;
+  const u32 salt_len = salt_bufs[SALT_POS_HOST].salt_len;
 
   u32x s[64] = { 0 };
 
   for (u32 i = 0, idx = 0; i < salt_len; i += 4, idx += 1)
   {
-    s[idx] = salt_bufs[SALT_POS].salt_buf[idx];
+    s[idx] = salt_bufs[SALT_POS_HOST].salt_buf[idx];
   }
 
   /**
@@ -139,7 +139,7 @@ KERNEL_FQ void m90001_sxx (KERN_ATTR_VECTOR ())
 
     blake2b_ctx_vector_t ctx;
 
-    blake2b_init_vector (&ctx);
+    blake2b_init_vector   (&ctx);
 
     blake2b_update_vector (&ctx, w, pw_len);
 
